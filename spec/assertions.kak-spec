@@ -1,0 +1,119 @@
+source "%opt{kak_spec_source_dir}/../rc/byline.kak"
+require-module "byline"
+
+################################################################################
+# byline-assert-selection-forwards
+
+# TODO
+
+################################################################################
+# byline-assert-selection-multi-line
+
+# TODO
+
+################################################################################
+# byline-assert-selection-reduced
+
+kak-spec \
+  -title "byline-assert-selection-reduced (blank line selection)" \
+  -input "x" \
+  -eval %{
+    execute-keys "<a-o>j"
+    byline-assert-selection-reduced
+    execute-keys "k"
+  } \
+  -expect-%val(error) "regex(.+)"
+
+kak-spec \
+  -title "byline-assert-selection-reduced (single character selection)" \
+  -input "x" \
+  -eval %{
+    byline-assert-selection-reduced
+  } \
+  -expect-%val{selection} "x"
+
+kak-spec \
+  -title "byline-assert-selection-reduced (multi-character selection)" \
+  -input "xyz" \
+  -eval %{
+    byline-assert-selection-reduced
+  } \
+  -expect-%val(error) "regex(.+)"
+
+################################################################################
+# byline-assert-selection-not-reduced
+
+kak-spec \
+  -title "byline-assert-selection-not-reduced (blank line selection)" \
+  -input "x" \
+  -eval %{
+    execute-keys "<a-o>j"
+    byline-assert-selection-not-reduced
+    execute-keys "k"
+  } \
+  -expect-%val{selection} "x"
+
+kak-spec \
+  -title "byline-assert-selection-not-reduced (single character selection)" \
+  -input "x" \
+  -eval %{
+    byline-assert-selection-not-reduced
+  } \
+  -expect-%val(error) "regex(.+)"
+
+kak-spec \
+  -title "byline-assert-selection-not-reduced (multi-character selection)" \
+  -input "xyz" \
+  -eval %{
+    byline-assert-selection-not-reduced
+  } \
+  -expect-%val{selection} "xyz"
+
+################################################################################
+# byline-assert-selection-really-reduced-blank-line
+
+kak-spec \
+  -title "byline-assert-selection-really-reduced-blank-line (blank line selection)" \
+  -input "x" \
+  -eval %{
+    execute-keys "<a-o>j"
+    byline-assert-selection-really-reduced-blank-line
+    execute-keys "k"
+  } \
+  -expect-%val{selection} "x"
+
+kak-spec \
+  -title "byline-assert-selection-really-reduced-blank-line (single character selection)" \
+  -input "x" \
+  -eval %{
+    byline-assert-selection-really-reduced-blank-line
+  } \
+  -expect-%val(error) "regex(.+)"
+
+kak-spec \
+  -title "byline-assert-selection-really-reduced-blank-line (multi-character selection)" \
+  -input "xyz" \
+  -eval %{
+    byline-assert-selection-really-reduced-blank-line
+  } \
+  -expect-%val(error) "regex(.+)"
+
+################################################################################
+# byline-assert-cursor-beginning-of-line
+
+# TODO
+
+################################################################################
+# byline-assert-cursor-end-of-line
+
+# TODO
+
+################################################################################
+# byline-assert-cursor-not-end-of-line
+
+# TODO
+
+################################################################################
+# byline-assert-no-count
+
+# TODO
